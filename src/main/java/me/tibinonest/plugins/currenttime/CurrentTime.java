@@ -5,7 +5,6 @@ import org.bukkit.World;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
 
-import java.time.ZoneId;
 import java.util.List;
 
 public final class CurrentTime extends JavaPlugin {
@@ -15,6 +14,8 @@ public final class CurrentTime extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        this.saveDefaultConfig();
+
         worlds = this.getServer().getWorlds().stream().filter(world -> world.getEnvironment().equals(World.Environment.NORMAL)).toList();
         worlds.forEach(world -> world.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, false));
         task = new GetTimeRunnable(this).runTaskTimer(this, 0, 20);

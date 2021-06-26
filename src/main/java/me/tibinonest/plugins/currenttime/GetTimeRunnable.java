@@ -15,7 +15,17 @@ public class GetTimeRunnable extends BukkitRunnable {
 
     @Override
     public void run() {
-        int time = (int) Math.floor(java.time.LocalTime.now(ZoneId.systemDefault()).toSecondOfDay() / 3.6);
+        String configZone = plugin.getConfig().getString("time-zone");
+        ZoneId zone;
+        try {
+            assert configZone != null;
+            zone = configZone.equals("") ? ZoneId.systemDefault() : ZoneId.of(configZone);
+        } catch (Exception e) {
+            plugin.getLogger().warning(plugin.getConfig().getString("messages.zone-not-found"));
+            this.cancel();
+            return;
+        }
+        int time = (int) Math.floor(java.time.LocalTime.now(zone).toSecondOfDay() / 3.6);
         CurrentTime.setTime(CurrentTime.worlds, time - 6000);
     }
 }
