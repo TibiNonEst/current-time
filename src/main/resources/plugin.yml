@@ -3,3 +3,10 @@ version: 1.0.0-alpha1
 main: me.tibinonest.plugins.currenttime.CurrentTime
 authors: [ TibiNonEst ]
 website: tibinonest.me
+commands:
+  currenttime:
+    description: Your description
+    usage: /<command>
+    permission: currenttime.reload
+    permission-message: You do not have permission to use this command.
+    aliases: [ct]

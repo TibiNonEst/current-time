@@ -2,6 +2,7 @@ package me.tibinonest.plugins.currenttime;
 
 import org.bukkit.GameRule;
 import org.bukkit.World;
+import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.Configuration;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
@@ -16,16 +17,28 @@ public final class CurrentTime extends JavaPlugin {
     public static BukkitTask task;
     public static Configuration config;
 
+
     @Override
     public void onEnable() {
         this.saveDefaultConfig();
+        handleEnable();
+
+        this.getCommand("currenttime").setExecutor(new ReloadCommand(this));
+    }
+
+    @Override
+    public void onDisable() {
+        if (task != null) task.cancel();
+    }
+
+    public boolean handleEnable() {
         config = this.getConfig();
 
         List<World> configWorlds = new LinkedList<>();
         config.getStringList("worlds").forEach(world -> configWorlds.add(this.getServer().getWorld(world)));
         if (configWorlds.contains(null)) {
             this.getLogger().warning(config.getString("messages.world-not-found"));
-            return;
+            return false;
         }
         worlds = configWorlds.isEmpty() ? this.getServer().getWorlds().stream().filter(world -> world.getEnvironment().equals(World.Environment.NORMAL)).toList() : configWorlds;
         worlds.forEach(world -> world.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, false));
@@ -37,18 +50,23 @@ public final class CurrentTime extends JavaPlugin {
             zone = configZone.equals("") ? ZoneId.systemDefault() : ZoneId.of(configZone);
         } catch (Exception e) {
             this.getLogger().warning(config.getString("messages.zone-not-found"));
-            return;
+            return false;
         }
         task = new GetTimeRunnable(worlds, zone).runTaskTimer(this, 0, 20);
 
         List<String> worldNames = new LinkedList<>();
         worlds.forEach(world -> worldNames.add(world.getName()));
         this.getLogger().info("Current time plugin started on world(s) " + String.join(", ", worldNames) + " on time zone " + zone);
+
+        return true;
     }
 
-    @Override
-    public void onDisable() {
-        // Plugin shutdown logic
+    public void handleReload(CommandSender sender) {
+        if (task != null) task.cancel();
+
+        this.reloadConfig();
+        boolean success = handleEnable();
+        sender.sendMessage("CurrentTime " + (success ? "reloaded!" : "could not be reloaded."));
     }
 
     public static void setTime(List<World> worlds, int time) {
