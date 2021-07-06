@@ -1,5 +1,6 @@
 name: CurrentTime
 version: ${pluginVersion}
+description: ${pluginDescription}
 main: me.tibinonest.plugins.currenttime.CurrentTime
 api-version: 1.13
 authors: [ TibiNonEst ]

@@ -17,8 +17,8 @@ dependencies {
 }
 
 group = 'me.tibinonest.plugins'
-version = '1.0.0-alpha2'
-description = 'Current Time'
+version = '1.0.0'
+description = 'A spigot plugin to set your world(s) to the current irl time.'
 
 shadowJar {
     archiveClassifier.set('')
@@ -38,7 +38,8 @@ processResources {
     duplicatesStrategy = DuplicatesStrategy.INCLUDE
     from(sourceSets.main.resources.srcDirs) {
         expand (
-                'pluginVersion': project.version
+                'pluginVersion': project.version,
+                'pluginDescription': project.description
         )
         include 'plugin.yml'
     }
