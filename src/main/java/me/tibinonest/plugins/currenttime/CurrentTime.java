@@ -10,6 +10,7 @@ import org.bukkit.scheduler.BukkitTask;
 import java.time.ZoneId;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public final class CurrentTime extends JavaPlugin {
 
@@ -40,7 +41,7 @@ public final class CurrentTime extends JavaPlugin {
             this.getLogger().warning(config.getString("messages.world-not-found"));
             return false;
         }
-        worlds = configWorlds.isEmpty() ? this.getServer().getWorlds().stream().filter(world -> world.getEnvironment().equals(World.Environment.NORMAL)).toList() : configWorlds;
+        worlds = configWorlds.isEmpty() ? this.getServer().getWorlds().stream().filter(world -> world.getEnvironment().equals(World.Environment.NORMAL)).collect(Collectors.toList()) : configWorlds;
         worlds.forEach(world -> world.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, false));
 
         String configZone = config.getString("time-zone");
@@ -64,6 +65,7 @@ public final class CurrentTime extends JavaPlugin {
     public void handleReload(CommandSender sender) {
         if (task != null) task.cancel();
 
+        this.getLogger().info("Reloading...");
         this.reloadConfig();
         boolean success = handleEnable();
         sender.sendMessage("CurrentTime " + (success ? "reloaded!" : "could not be reloaded."));

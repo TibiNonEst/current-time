@@ -1,6 +1,7 @@
 name: CurrentTime
-version: 1.0.0-alpha2
+version: ${pluginVersion}
 main: me.tibinonest.plugins.currenttime.CurrentTime
+api-version: 1.13
 authors: [ TibiNonEst ]
 website: tibinonest.me
 commands:
@@ -10,3 +11,12 @@ commands:
     permission: currenttime.reload
     permission-message: You do not have permission to use this command.
     aliases: [ct]
+permissions:
+  currenttime.reload:
+    description: Reloads the CurrentTime plugin.
+    default: op
+  currenttime.*:
+    description: Wildcard permission
+    default: op
+    children:
+      currenttime.reload: true
