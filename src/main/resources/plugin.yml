@@ -4,7 +4,7 @@ description: ${pluginDescription}
 main: me.tibinonest.plugins.currenttime.CurrentTime
 api-version: 1.13
 authors: [ TibiNonEst ]
-website: tibinonest.me
+website: https://tibinonest.me
 commands:
   currenttime:
     description: Plugin reload command
