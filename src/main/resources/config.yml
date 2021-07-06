@@ -1,6 +1,13 @@
+# Time zone, please use TZBD names or UTC offsets
+# A list of available names can be viewed at https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+# Will use system default if left empty
 time-zone: 'America/New_York'
+
+# A list of worlds to apply the time zone to
+# Will apply to all overworlds if left empty
 worlds: []
 
+# Plugin messages
 messages:
   zone-not-found: 'The requested time zone could not be found, please try entering a valid one.'
   world-not-found: 'The requested world or worlds could not be found, please try entering a valid one.'
