@@ -7,7 +7,7 @@ authors: [ TibiNonEst ]
 website: tibinonest.me
 commands:
   currenttime:
-    description: Your description
+    description: Plugin reload command
     usage: /<command>
     permission: currenttime.reload
     permission-message: You do not have permission to use this command.
