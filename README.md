@@ -2,7 +2,7 @@
 **A spigot plugin to set your world(s) to the current irl time.**
 
 ## Commands and Permissions
-The plugion currently only has one command: /currenttime.
+The plugin currently only has one command: /currenttime.
 This command is available with the permission currenttime.reload and reloads the plugin's config.yml file.
 You can also run this command with the alias /ct.
 
