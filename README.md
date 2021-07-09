@@ -1,4 +1,4 @@
-# Current Time
+# Current Time ![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/tibinonest/current-time/gradle-ci/main) ![GitHub](https://img.shields.io/github/license/tibinonest/current-time) ![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/tibinonest/current-time) ![Spiget tested server versions](https://img.shields.io/spiget/tested-versions/93971)
 **A spigot plugin to set your world(s) to the current irl time.**
 
 ## Commands and Permissions
