@@ -3,8 +3,9 @@ plugins {
     id 'java'
 }
 
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+group = 'me.tibinonest.plugins'
+version = '1.0.1'
+description = 'A spigot plugin to set your world(s) to the current irl time.'
 
 repositories {
     maven {
@@ -14,24 +15,27 @@ repositories {
 
 dependencies {
     compileOnly 'com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT'
+    implementation 'org.bstats:bstats-bukkit:2.2.1'
 }
 
-group = 'me.tibinonest.plugins'
-version = '1.0.0'
-description = 'A spigot plugin to set your world(s) to the current irl time.'
+sourceCompatibility = JavaVersion.VERSION_1_8
+targetCompatibility = JavaVersion.VERSION_1_8
+
+java {
+    withSourcesJar()
+}
 
 shadowJar {
     archiveClassifier.set('')
+    dependencies {
+        include dependency('org.bstats:')
+    }
+    relocate 'org.bstats', 'me.tibinonest.plugins.currenttime.dependencies.bstats'
+    from 'LICENSE'
 }
 
-tasks.withType(JavaCompile).configureEach {
-
-    it.options.encoding = "UTF-8"
-
-    def targetVersion = 8
-    if (JavaVersion.current().isJava9Compatible()) {
-        it.options.release = targetVersion
-    }
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
 }
 
 processResources {
@@ -44,3 +48,5 @@ processResources {
         include 'plugin.yml'
     }
 }
+
+assemble.dependsOn shadowJar

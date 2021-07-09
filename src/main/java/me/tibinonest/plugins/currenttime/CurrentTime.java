@@ -1,5 +1,6 @@
 package me.tibinonest.plugins.currenttime;
 
+import org.bstats.bukkit.Metrics;
 import org.bukkit.GameRule;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
@@ -25,6 +26,8 @@ public final class CurrentTime extends JavaPlugin {
         handleEnable();
 
         this.getCommand("currenttime").setExecutor(new ReloadCommand(this));
+
+        Metrics metrics = new Metrics(this, 11982);
     }
 
     @Override
