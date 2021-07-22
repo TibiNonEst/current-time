@@ -7,7 +7,6 @@ import java.time.ZoneId;
 import java.util.List;
 
 public class GetTimeRunnable extends BukkitRunnable {
-
     private final List<World> worlds;
     private final ZoneId zone;
 

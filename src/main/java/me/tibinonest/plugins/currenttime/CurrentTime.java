@@ -14,11 +14,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public final class CurrentTime extends JavaPlugin {
-
     public static List<World> worlds;
     public static BukkitTask task;
     public static Configuration config;
-
 
     @Override
     public void onEnable() {

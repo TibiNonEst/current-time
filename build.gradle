@@ -27,11 +27,9 @@ java {
 
 shadowJar {
     archiveClassifier.set('')
-    dependencies {
-        include dependency('org.bstats:')
-    }
-    relocate 'org.bstats', 'me.tibinonest.plugins.currenttime.dependencies.bstats'
+    relocate 'org.bstats', 'bstats'
     from 'LICENSE'
+    minimize()
 }
 
 tasks.withType(JavaCompile) {
