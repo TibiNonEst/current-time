@@ -25,7 +25,7 @@ public final class CurrentTime extends JavaPlugin {
 
         this.getCommand("currenttime").setExecutor(new ReloadCommand(this));
 
-        Metrics metrics = new Metrics(this, 11982);
+        new Metrics(this, 11982);
     }
 
     @Override
