@@ -7,6 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.Configuration;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitTask;
+import org.jetbrains.annotations.NotNull;
 
 import java.time.ZoneId;
 import java.util.LinkedList;
@@ -72,11 +73,7 @@ public final class CurrentTime extends JavaPlugin {
         sender.sendMessage("CurrentTime " + (success ? "reloaded!" : "could not be reloaded."));
     }
 
-    public static void setTime(List<World> worlds, int time) {
-        worlds.forEach(world -> world.setTime(fixTime(time)));
-    }
-
-    public static int fixTime(int time) {
-        return time < 0 ? 24000 + time : time;
+    public static void setTime(@NotNull List<World> worlds, int time) {
+        worlds.forEach(world -> world.setTime(time % 24000));
     }
 }
